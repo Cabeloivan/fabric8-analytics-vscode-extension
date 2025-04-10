@@ -2,7 +2,7 @@ import * as chai from 'chai';
 import * as sinon from 'sinon';
 import * as sinonChai from 'sinon-chai';
 
-import { DepOutputChannel } from '../src/DepOutputChannel';
+import { DepOutputChannel } from '../src/depOutputChannel';
 import { Titles } from '../src/constants';
 
 const expect = chai.expect;
@@ -17,6 +17,12 @@ suite('DepOutputChannel module', () => {
 
   teardown(() => {
     sandbox.restore();
+  });
+
+  test('DepOutputChannel should create an OutputChannel if it does not exist', () => {
+    const depOutputChannel = new DepOutputChannel();
+
+    expect(depOutputChannel.outputChannel).to.exist;
   });
 
   test('getOutputChannel should return OutputChannel with default name', () => {
@@ -53,7 +59,7 @@ suite('DepOutputChannel module', () => {
     expect(clearStub).to.be.calledOnce;
   });
 
-  test('addOutputChannel should call add() once', () => {
+  test('addMsgOutputChannel should call add() once', () => {
     const depOutputChannel = new DepOutputChannel();
     const appendStub = sandbox.stub(depOutputChannel.outputChannel, 'append');
 
